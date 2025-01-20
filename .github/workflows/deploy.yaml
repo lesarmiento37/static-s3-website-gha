@@ -46,4 +46,4 @@ jobs:
             --exclude "node_modules/*" \
             --exclude ".git/*" \
             --exclude ".github/*"
-          aws s3 website s3://my-static-website-bucket-fsl-leonardo-${{ github.event.inputs.branch }}/ --index-document index.html --error-document error.html
+          aws s3 website s3://my-static-website-bucket-fsl-leonardo-devel/ --index-document index.html --error-document error.html
