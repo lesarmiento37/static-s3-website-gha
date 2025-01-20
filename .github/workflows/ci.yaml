@@ -9,35 +9,39 @@ on:
         default: "main"
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.branch }}
 
-      - name: Print branch
+      - name: Run Job
         run: |
-          echo "Manually Triggered job for branch: ${{ github.event.inputs.branch }}"
+          echo "Manually triggered job for branch: ${{ github.event.inputs.branch }}"
 
-      - name: Install Node.js
+  
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Run Linter
-        run: npm run lint
-
-      - name: Run Formatter Prettier
+      - name: Install prettier
         run: npm install --save-dev prettier
 
-      - name: Run Tests
+      - name: Run linter (ESLint)
+        run: npm run lint
+
+      - name: Run formatter (Prettier)
+        run: npm run prettier
+
+      - name: Run tests (Jest)
         run: CI=true npm run test
 
-      - name: Build Application
+      - name: Build application
         run: npm run build
