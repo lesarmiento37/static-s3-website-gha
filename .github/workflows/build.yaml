@@ -25,13 +25,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-
-      - name: Install sass
-        run: npm install node-sass@^5.0.0
-      
-      - name: Install dom
-        run: npm install @testing-library/jest-dom@5.11.9 --legacy-peer-deps
+          node-version: '16'
 
       - name: Install Dependencies
         run: npm install
