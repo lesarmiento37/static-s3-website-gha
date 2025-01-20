@@ -23,9 +23,12 @@ jobs:
           echo "Manually Triggered job for branch: ${{ github.event.inputs.branch }}"
 
       - name: Install Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
+      
+      - name: Install dom
+        run: npm install @testing-library/dom@9
           
       - name: Install Dependencies
         run: npm install
