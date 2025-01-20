@@ -28,8 +28,8 @@ jobs:
           node-version: '16'
       
       - name: Install dom
-        run: npm install @testing-library/jest-dom@5.11.9
-          
+        run: npm install @testing-library/jest-dom@5.11.9 --legacy-peer-deps
+
       - name: Install Dependencies
         run: npm install
 
