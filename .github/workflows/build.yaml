@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to deploy"
+        required: true
+        default: "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Print branch
+        run: |
+          echo "Manually Triggered job for branch: ${{ github.event.inputs.branch }}"
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Run Formatter Prettier
+        run: npm install --save-dev prettier
+
+      - name: Run Tests
+        run: CI=true npm run test
+
+      - name: Build Application
+        run: npm run build
